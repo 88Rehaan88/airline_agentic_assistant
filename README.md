@@ -114,14 +114,15 @@ This prevents:
 
 ### 1. **Manual Agent Loop Instead of Agent Frameworks:**
 
-The entire tool-calling loop was implemented manually instead of using LangChain Agents, AutoGen, CrewAI, or the OpenAI Agents SDK.
+**Choice:** The entire tool-calling loop was implemented manually instead of using LangChain Agents, AutoGen, CrewAI, or the OpenAI Agents SDK.
 
 **Why:** Gives full control over tool execution, logging, error handling, safety limits etc
 
 **Trade-off:**  But this has more implementation complexity and more boilerplate than using a framework.
 
 ### 2. Hybrid RAG instead of one retrieval path:
-Split manual search into a normal text path (FAISS + rerank) and a numeric table path (page selection + structured table extraction).
+
+**Choice:** Split manual search into a normal text path (FAISS + rerank) and a numeric table path (page selection + structured table extraction).
 
 **Why:** Boeing performance pages look almost identical in embedding space, a single semantic path often picks the wrong table.
 
@@ -129,7 +130,7 @@ Split manual search into a normal text path (FAISS + rerank) and a numeric table
 
 ### 3. **3. LLM-based table reading vs. deterministic parsing:**
    
-Extract tables offline with pdfplumber, then use a stronger model (GPT-4o) to pick the page and read the cell.
+**Choice:** Extract tables offline with pdfplumber, then use a stronger model (GPT-4o) to pick the page and read the cell.
 
 **Why:** PDF tables are messy; hard-coded parsers would be fragile across many table layouts.
 
@@ -137,7 +138,7 @@ Extract tables offline with pdfplumber, then use a stronger model (GPT-4o) to pi
 
 ### 4. **Stateless Agent Loop (No Conversation Memory):**
 
-Each /ask request is handled on its own. The agent loop does not store chat history or long-term memory between calls.
+**Choice:** Each /ask request is handled on its own. The agent loop does not store chat history or long-term memory between calls.
 
 **Why:** Reduces complexity and keeps the system simpler and easier to debug, test, and evaluate since every response depends only on the current query and tool outputs, not earlier conversation history that may be incorrect or irrelevant. The model is also less likely to carry forward incorrect assumptions from previous turns.
 
