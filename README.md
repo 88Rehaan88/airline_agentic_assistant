@@ -195,6 +195,47 @@ Use normal text instead of quoted phrases.
 --------------------------------------------------
 
 1. Clone the Repository:
+
 git clone https://github.com/88Rehaan88/airline_agentic_assistant.git
+
 cd airline_agentic_assistant
 
+2. Create & Activate Virtual Environment
+
+python -m venv venv
+- venv\Scripts\activate          # Windows
+- source venv/bin/activate     # macOS/Linux
+
+3. Install Dependencies:
+
+pip install -r requirements.txt
+
+4. Configure environment variables
+
+ Create a .env file (or copy .env.example to .env file) add your OpenAI key:
+
+OPENAI_API_KEY=your_key_here
+
+5. Manual and index:
+
+The repo includes:
+- data/Boeing B737 Manual.pdf
+- Pre-built files in index/ (faiss.index, chunks.json, tables.json)
+
+No extra build step is required to start the API.
+
+6. Start the server:
+
+uvicorn main:app --reload
+
+Once running, open Swagger UI at:
+
+http://localhost:8000/docs
+
+Use POST /ask with a JSON body like:
+
+{ "query": "your question here" }
+
+Note: If port 8000 is busy, use another port, e.g. uvicorn main:app --reload --port 8001 
+
+-----------------------
