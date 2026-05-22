@@ -29,7 +29,7 @@ The assistant exposes a single /ask API endpoint and returns:
 
 -------------------------------------------------------------------
 
-#### *B. Agent loop (how the agent works):
+#### *B. Agent loop (how the agent works):*
 
 1. User asks a question
 The question is sent to the /ask endpoint.
@@ -45,29 +45,30 @@ The agent can call:
 
 4. Inside search_documentation (hybrid RAG)
 Every manual question goes through this path when the agent calls search_documentation:
+Embed & retrieve — Embed the query and fetch the top 8 chunks from FAISS.
 
-1. Embed & retrieve — Embed the query and fetch the top 8 chunks from FAISS (index/faiss.index + index/chunks.json).
+A. Classify — If a query has ≥2 numbers and a performance/table keyword (e.g. climb limit, OAT, pressure altitude), we treat it as a numeric_query.
 
-2. Classify — If a query has ≥2 numbers and a performance/table keyword (e.g. climb limit, OAT, pressure altitude), we treat it as a numeric_query.
+B. Branch
 
-3. Branch
-
-*A. Normal (text) path:*
+*a. Normal (text) path:*
 - Rerank candidates with gpt-4o-mini and keep the top 2 chunks.
 - Format chunk text with document title and page number.
 - Return formatted text + chunks for references.
 
-*B. Numeric (table) path:*
+*b. Numeric (table) path:*
 - Gpt-4o selects the single best page from the 8 candidates.
 - Load raw tables for that page from tables.json using pdfplumber.
 - Gpt-4o reads structured tables + page context and returns one value (e.g. 52.2 (1000 KG)), or NOT FOUND.
 - Format the answer in a proper sentence so the agent can report it clearly.
 - If extraction fails, fall back to the normal rerank path.
 
-4. Return references — The output goes back into the agent loop and pages from search are collected for references.
+
+5. Results go back to the agent:
+Tool outputs are returned to the model. It may call more tools or write the final answer.
 
 6. Response to the user
-The API returns the answer along with which manual pages were used, and which tools were called.
+The API returns the answer, which manual pages were used, and which tools were called.
 
 ---------------------------------------------------------------
 
