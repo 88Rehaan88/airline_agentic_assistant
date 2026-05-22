@@ -182,4 +182,4 @@ Future versions could support:
 
 while still maintaining grounding and loop safety.
 
-### 5.  
+----------------------
