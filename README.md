@@ -25,4 +25,49 @@ The assistant exposes a single /ask API endpoint and returns:
 4. The API returns:
    - Answer — final text from the model
    - References — manual title + page numbers from search results
-• Tool_calls — ordered log of every tool the agent invoked
+   - Tool_calls — ordered log of every tool the agent invoked
+
+-------------------------------------------------------------------
+
+#### *B. Agent loop (how the agent works):
+
+1. User asks a question
+The question is sent to the /ask endpoint.
+
+2. Agent loop starts
+A hand-rolled loop calls the OpenAI Responses API. The gpt-4o-mini model decides whether it needs tools or can answer directly.
+
+3. Tools run when needed
+The agent can call:
+- Search documentation — Search the Boeing 737 manual
+- Get current datetime — UTC or local date and time for major cities. 
+- Get weather — Live weather conditions for a city
+
+4. Inside search_documentation (hybrid RAG)
+Every manual question goes through this path when the agent calls search_documentation:
+
+1. Embed & retrieve — Embed the query and fetch the top 8 chunks from FAISS (index/faiss.index + index/chunks.json).
+
+2. Classify — If a query has ≥2 numbers and a performance/table keyword (e.g. climb limit, OAT, pressure altitude), we treat it as a numeric_query.
+
+3. Branch
+
+*A. Normal (text) path:*
+- Rerank candidates with gpt-4o-mini and keep the top 2 chunks.
+- Format chunk text with document title and page number.
+- Return formatted text + chunks for references.
+
+*B. Numeric (table) path:*
+- Gpt-4o selects the single best page from the 8 candidates.
+- Load raw tables for that page from tables.json using pdfplumber.
+- Gpt-4o reads structured tables + page context and returns one value (e.g. 52.2 (1000 KG)), or NOT FOUND.
+- Format the answer in a proper sentence so the agent can report it clearly.
+- If extraction fails, fall back to the normal rerank path.
+
+4. Return references — The output goes back into the agent loop and pages from search are collected for references.
+
+6. Response to the user
+The API returns the answer along with which manual pages were used, and which tools were called.
+
+---------------------------------------------------------------
+
