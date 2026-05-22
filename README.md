@@ -18,10 +18,10 @@ The assistant exposes a single /ask API endpoint and returns:
 ### Step-by-step workflow
 
 #### *A. End-to-end request (what happens on /ask)*
-
-1. The client sends a JSON body { "query": "..." } to POST /ask.
-2. FastAPI validates the query (empty queries return 400).
-3. The agent loop (app/agent/loop.py) runs until the model produces a final answer or hits the iteration limit.
+ 
+1. A user sends a query to the /ask endpoint.
+2. FastAPI validates the query (empty queries return an error message).
+3. The agent loop runs until the model produces a final answer or hits the iteration limit.
 4. The API returns:
 - Answer — final text from the model
 - References — manual title + page numbers from search results
