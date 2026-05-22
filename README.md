@@ -128,7 +128,7 @@ This prevents:
 
 **Trade-off:** More moving parts and two code paths to maintain, but much better results on performance-style questions than FAISS alone.
 
-### 3. **3. LLM-based table reading vs. deterministic parsing:**
+### **3. LLM-based table reading vs. deterministic parsing:**
    
 **Choice:** Extract tables offline with pdfplumber, then use a stronger model (GPT-4o) to pick the page and read the cell.
 
