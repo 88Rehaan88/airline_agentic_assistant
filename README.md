@@ -75,3 +75,38 @@ The API returns the answer, which manual pages were used, and which tools were c
 
 ---------------------------------------------------------------
 
+## Handling Tool Errors and Runaway Loops:
+
+### 1. Tool Error Handling:
+
+Tool execution is wrapped in try/except blocks inside the agent loop.
+
+If a tool fails:
+- the loop does not crash
+- the exception is converted into afallback error message. 
+- the error output is fed back into the model as a normal tool response
+
+This allows the model to:
+- recover gracefully
+- retry with different reasoning
+- or produce a fallback response
+
+This design keeps the agent loop robust even when:
+- external APIs fail
+- retrieval returns invalid data
+- tool arguments are malformed
+
+### 2. Runaway Loop Protection:
+
+The agent loop is protected using a fixed MAX_ITERATIONS limit.
+
+If the model continues requesting tools without producing a final answer:
+- The loop terminates automatically
+- And the API returns a safe fallback response
+
+This prevents:
+- infinite tool-calling loops
+- excessive token usage
+- Accidental API cost escalation
+
+-------------------------------------
