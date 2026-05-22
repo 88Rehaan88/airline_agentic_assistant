@@ -21,7 +21,7 @@ The assistant exposes a single /ask API endpoint and returns:
 
 ## System Workflow Diagram:
 
-<img width="850" height="1000" alt="dark green drawio" src="https://github.com/user-attachments/assets/e0352520-cd15-45b3-ab08-d7c41485f1e9" />
+<img width="825" height="950" alt="dark green drawio" src="https://github.com/user-attachments/assets/e0352520-cd15-45b3-ab08-d7c41485f1e9" />
 
 
 -----------------------------------------------------------
