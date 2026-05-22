@@ -1,7 +1,7 @@
 # Airline Agentic Assistant
 
 
-## Project Overview:
+## 1. Project Overview:
 This project is an agentic aviation assistant that answers Boeing 737 Operations Manual questions using FastAPI, OpenAI’s Responses API and a hybrid RAG pipeline. The agent can search the manual, look up performance tables, and call datetime, weather tools—without LangChain agents or the OpenAI Agents SDK.
 
 It supports:
@@ -17,7 +17,7 @@ The assistant exposes a single /ask API endpoint and returns:
 
 -----------------------------------------------------------
 
-## Step-by-step workflow
+## 2. Step-by-step workflow
 
 #### *A. End-to-end request (what happens on /ask)*
  
@@ -75,7 +75,7 @@ The API returns the answer, which manual pages were used, and which tools were c
 
 ---------------------------------------------------------------
 
-## Handling Tool Errors and Runaway Loops:
+## 3. Handling Tool Errors and Runaway Loops:
 
 ### 1. Tool Error Handling:
 
@@ -110,7 +110,7 @@ This prevents:
 
 -------------------------------------
 
-## Tradeoffs: 
+## 4. Tradeoffs: 
 
 ### 1. **Manual Agent Loop Instead of Agent Frameworks:**
 
@@ -148,7 +148,7 @@ eg. “Compare the weather in both cities from my last two questions.”).
 
 -----------------------------------
 
-## Limitations and Future Improvements:
+## 5. Limitations and Future Improvements:
 
 ### 1. Table Extraction:
 
@@ -183,3 +183,18 @@ Future versions could support:
 while still maintaining grounding and loop safety.
 
 ----------------------
+
+## 6. Setup & Installation:
+
+### ⚠️Important Note (for API queries)
+
+Please avoid including double-quotes (") inside your query text.
+Certain characters can interfere with request parsing in FastAPI/Swagger and may cause the query to fail.
+Use normal text instead of quoted phrases. 
+
+--------------------------------------------------
+
+1. Clone the Repository:
+git clone https://github.com/88Rehaan88/airline_agentic_assistant.git
+cd airline_agentic_assistant
+
