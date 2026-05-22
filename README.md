@@ -148,3 +148,38 @@ eg. “Compare the weather in both cities from my last two questions.”).
 
 -----------------------------------
 
+## Limitations and Future Improvements:
+
+### 1. Table Extraction:
+
+The current system uses pdfplumber for table extraction, which works reasonably well for basic table queries but struggles with some complex or double table layouts and merged cells.
+
+Future improvements could include implementing tools like Camelot or Tabula, which provide:
+- better structured table parsing
+- improved row/column alignment
+- more reliable handling of aviation performance tables
+
+This would improve numeric query robustness further.
+
+### 2. OCR and Image Understanding:
+
+Some parts of the manual contain diagrams, charts, or image-based information that are not captured well through text extraction alone.
+
+A future improvement would be:
+- OCR integration
+- Multimodal/image understanding pipelines
+
+This would allow the assistant to answer questions grounded in visual manual content as well.
+
+### 4. Conversation Memory and Multi-Turn Context
+
+The current assistant is intentionally stateless.
+
+Future versions could support:
+- multi-turn conversations
+- conversational memory
+- follow-up clarification questions
+
+while still maintaining grounding and loop safety.
+
+### 5.  
