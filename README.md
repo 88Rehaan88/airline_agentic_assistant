@@ -1,4 +1,4 @@
-### Airline Agentic Assistant
+## Airline Agentic Assistant
 
 This project is an agentic aviation assistant that answers Boeing 737 Operations Manual questions using FastAPI, OpenAI’s Responses API and a hybrid RAG pipeline. The agent can search the manual, look up performance tables, and call datetime, weather tools—without LangChain agents or the OpenAI Agents SDK.
 
@@ -14,3 +14,15 @@ The assistant exposes a single /ask API endpoint and returns:
 - The ordered sequence of tool calls made by the agent
 
 -----------------------------------------------------------
+
+### Step-by-step workflow
+
+#### *A. End-to-end request (what happens on /ask)*
+
+1. The client sends a JSON body { "query": "..." } to POST /ask.
+2. FastAPI validates the query (empty queries return 400).
+3. The agent loop (app/agent/loop.py) runs until the model produces a final answer or hits the iteration limit.
+4. The API returns:
+- Answer — final text from the model
+- References — manual title + page numbers from search results
+- Tool_calls — ordered log of every tool the agent invoked
