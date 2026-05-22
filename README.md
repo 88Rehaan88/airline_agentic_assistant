@@ -192,7 +192,27 @@ while still maintaining grounding and loop safety.
 
 ----------------------
 
-## 6. Setup & Installation:
+## 6. Example Outputs: 
+
+### 1. Table-based query:
+
+<img width="1161" height="533" alt="Table based query" src="https://github.com/user-attachments/assets/6ba39df7-4a06-42d5-9784-bbd56348c47b" />
+
+----------------------
+
+### 2. Normal retrieval query: 
+
+<img width="1532" height="611" alt="normal query" src="https://github.com/user-attachments/assets/1b9134e1-2c42-4f2d-af36-b1f4a953f2e1" />
+
+----------------------
+
+### 3. Chained, multi-tool query: 
+
+<img width="1560" height="706" alt="Screenshot 2026-05-23 025054" src="https://github.com/user-attachments/assets/a601d7e7-6da1-4741-b2cf-318abe9bbb7b" />
+
+----------------------
+
+## 7. Setup & Installation:
 
 ### ⚠️Important Note (for API queries)
 
