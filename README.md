@@ -98,9 +98,8 @@ This design keeps the agent loop robust even when:
 
 ### 2. Runaway Loop Protection:
 
-The agent loop is protected using a fixed MAX_ITERATIONS limit.
-
-If the model continues requesting tools without producing a final answer:
+The agent loop can call the model multiple times in one request (tool call → result → model again). To avoid endless tool-calling:
+- The agent loop is protected using a fixed max_iterations limit.
 - The loop terminates automatically
 - And the API returns a safe fallback response
 
@@ -110,3 +109,5 @@ This prevents:
 - Accidental API cost escalation
 
 -------------------------------------
+
+
