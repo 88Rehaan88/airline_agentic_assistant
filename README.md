@@ -112,7 +112,7 @@ This prevents:
 
 ## Tradeoffs: 
 
-1. **Manual Agent Loop Instead of Agent Frameworks:**
+### 1. **Manual Agent Loop Instead of Agent Frameworks:**
 
 The entire tool-calling loop was implemented manually instead of using LangChain Agents, AutoGen, CrewAI, or the OpenAI Agents SDK.
 
@@ -120,14 +120,14 @@ The entire tool-calling loop was implemented manually instead of using LangChain
 
 **Trade-off:**  But this has more implementation complexity and more boilerplate than using a framework.
 
-2. Hybrid RAG instead of one retrieval path:
+### 2. Hybrid RAG instead of one retrieval path:
 Split manual search into a normal text path (FAISS + rerank) and a numeric table path (page selection + structured table extraction).
 
 **Why:** Boeing performance pages look almost identical in embedding space, a single semantic path often picks the wrong table.
 
 **Trade-off:** More moving parts and two code paths to maintain, but much better results on performance-style questions than FAISS alone.
 
-3. **3. LLM-based table reading vs. deterministic parsing:**
+### 3. **3. LLM-based table reading vs. deterministic parsing:**
    
 Extract tables offline with pdfplumber, then use a stronger model (GPT-4o) to pick the page and read the cell.
 
@@ -135,7 +135,7 @@ Extract tables offline with pdfplumber, then use a stronger model (GPT-4o) to pi
 
 **Trade-off:** Faster to build and works well for most common cases (e.g. climb limit at 2000 ft / 50°C), but not reliable on every table (obstacle grids, different altitudes/OAT columns). A deterministic lookup would be more accurate but take longer to implement.
 
-4. **Stateless Agent Loop (No Conversation Memory):**
+### 4. **Stateless Agent Loop (No Conversation Memory):**
 
 Each /ask request is handled on its own. The agent loop does not store chat history or long-term memory between calls.
 
