@@ -206,7 +206,13 @@ while still maintaining grounding and loop safety.
 
 ----------------------
 
-### 3. Chained, multi-tool query: 
+### 3. Date-Time Tool query:
+
+<img width="1318" height="414" alt="time based" src="https://github.com/user-attachments/assets/53e63835-47f0-46d4-bcff-645afc78e0d4" />
+
+----------------------
+
+### 4. Chained, multi-tool query: 
 
 <img width="1560" height="706" alt="Screenshot 2026-05-23 025054" src="https://github.com/user-attachments/assets/a601d7e7-6da1-4741-b2cf-318abe9bbb7b" />
 
