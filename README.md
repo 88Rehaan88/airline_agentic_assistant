@@ -19,6 +19,14 @@ The assistant exposes a single /ask API endpoint and returns:
 
 ## 2. Step-by-step workflow
 
+## System Workflow Diagram:
+
+<img width="711" height="1081" alt="dark green drawio" src="https://github.com/user-attachments/assets/e0352520-cd15-45b3-ab08-d7c41485f1e9" />
+
+
+-----------------------------------------------------------
+
+
 #### *A. End-to-end request (what happens on /ask)*
  
 1. A user sends a query to the /ask endpoint.
