@@ -45,11 +45,12 @@ The agent can call:
 
 4. Inside search_documentation (hybrid RAG)
 Every manual question goes through this path when the agent calls search_documentation:
-  A. Embed & retrieve — Embed the query and fetch the top 8 chunks from FAISS.
 
-  B. Classify — If a query has ≥2 numbers and a performance/table keyword (e.g. climb limit, OAT, pressure altitude), we treat it as a numeric_query.
+A. Embed & retrieve — Embed the query and fetch the top 8 chunks from FAISS.
 
-B. Branch
+B. Classify — If a query has ≥2 numbers and a performance/table keyword (e.g. climb limit, OAT, pressure altitude), we treat it as a numeric_query.
+
+C. Branch
 
 *a. Normal (text) path:*
 - Rerank candidates with gpt-4o-mini and keep the top 2 chunks.
