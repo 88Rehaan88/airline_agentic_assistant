@@ -23,6 +23,7 @@ The assistant exposes a single /ask API endpoint and returns:
 2. FastAPI validates the query (empty queries return an error message).
 3. The agent loop runs until the model produces a final answer or hits the iteration limit.
 4. The API returns:
-- Answer — final text from the model
-- References — manual title + page numbers from search results
+Answer — final text from the model
+
+References — manual title + page numbers from search results
 - Tool_calls — ordered log of every tool the agent invoked
