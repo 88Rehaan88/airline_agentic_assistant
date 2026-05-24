@@ -2,13 +2,13 @@
 
 
 ## 1. Project Overview:
-This project is an agentic aviation assistant that answers Boeing 737 Operations Manual questions using FastAPI, OpenAI’s Responses API and a hybrid RAG pipeline. The agent can search the manual, look up performance tables, and call datetime, weather tools—without LangChain agents or the OpenAI Agents SDK.
+This project is an agentic aviation assistant that answers Boeing 737 Operations Manual questions using FastAPI, OpenAI’s Responses API and a hybrid RAG pipeline. The agent can search the manual, look up performance tables, and call datetime, weather tools-without LangChain agents or the OpenAI Agents SDK.
 
 It supports:
 
-- Normal text queries — procedures, policies, limitations (semantic search + LLM reranking)
-- Numeric / table queries — takeoff climb limit, field limit, obstacle limit weights (structured table extraction)
-- Tool-augmented queries — current UTC time and live weather for any city
+- Normal text queries - procedures, policies, limitations (semantic search + LLM reranking)
+- Numeric / table queries - takeoff climb limit, field limit, obstacle limit weights (structured table extraction)
+- Tool-augmented queries - current UTC time and live weather for any city
 
 The assistant exposes a single /ask API endpoint and returns:
 - The final grounded answer
@@ -33,9 +33,9 @@ The assistant exposes a single /ask API endpoint and returns:
 2. FastAPI validates the query (empty queries return an error message).
 3. The agent loop runs until the model produces a final answer or hits the iteration limit.
 4. The API returns:
-   - Answer — final text from the model
-   - References — manual title + page numbers from search results
-   - Tool_calls — ordered log of every tool the agent invoked
+   - Answer - final text from the model
+   - References - manual title + page numbers from search results
+   - Tool_calls - ordered log of every tool the agent invoked
 
 -------------------------------------------------------------------
 
@@ -49,16 +49,16 @@ A hand-rolled loop calls the OpenAI Responses API. The gpt-4o-mini model decides
 
 3. Tools run when needed
 The agent can call:
-- Search documentation — Search the Boeing 737 manual
-- Get current datetime — UTC or local date and time for major cities. 
-- Get weather — Live weather conditions for a city
+- Search documentation - Search the Boeing 737 manual
+- Get current datetime - UTC or local date and time for major cities. 
+- Get weather - Live weather conditions for a city
 
 4. Inside search_documentation (hybrid RAG)
 Every manual question goes through this path when the agent calls search_documentation:
 
-A. Embed & retrieve — Embed the query and fetch the top 8 chunks from FAISS.
+A. Embed & retrieve - Embed the query and fetch the top 8 chunks from FAISS.
 
-B. Classify — If a query has ≥2 numbers and a performance/table keyword (e.g. climb limit, OAT, pressure altitude), we treat it as a numeric_query.
+B. Classify - If a query has ≥2 numbers and a performance/table keyword (e.g. climb limit, OAT, pressure altitude), we treat it as a numeric_query.
 
 C. Branch
 
