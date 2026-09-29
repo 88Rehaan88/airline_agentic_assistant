@@ -91,7 +91,7 @@ Tool execution is wrapped in try/except blocks inside the agent loop.
 
 If a tool fails:
 - the loop does not crash
-- the exception is converted into afallback error message. 
+- the exception is converted into a fallback error message. 
 - the error output is fed back into the model as a normal tool response
 
 This allows the model to:
